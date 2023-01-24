@@ -1,41 +1,63 @@
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations.js';
 import { selectVisibleContacts } from 'redux/contacts/selectors.js';
-import css from './ContactList.module.css';
+import { Box, Button } from '@mui/material';
 
 export const ContactList = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
-  
+
   return (
-    <ul className={css.list}>
+    <Box
+      sx={{
+        marginBottom: '50px',
+        marginTop: '10px',
+        gap: '5px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       {visibleContacts.map(({ name, number, id }) => (
-        <li className={css.item} key={id}>
+        <Box
+          sx={{
+            width: '85%',
+
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '0px',
+            marginTop: '0px',
+            fontWeight: 500,
+          }}
+          key={id}
+        >
           <p>{name}:</p> <p>{number}</p>
-          
-          <button className={css.button} type="button" onClick={() => dispatch(deleteContact(id))}>
+          <Button
+            sx={{
+              height: 30,
+              width: 100,
+              paddingBottom: '20px',
+              paddingTop: '20px',
+
+              color: 'white',
+              backgroundColor: '#006064',
+              borderRadius: '15px',
+
+              '&:hover:not(.active)': {
+                color: '#84ffff',
+                backgroundColor: '#006064',
+              },
+            }}
+            type="button"
+            onClick={() => dispatch(deleteContact(id))}
+          >
             Delete
-          </button>
-
-          {/* <Button sx={{
-        height: 30,
-        width: 90,
-        color:'white',
-        borderRadius: 15,
-        backgroundColor: 'rgb(02, 00, 56)',
-      
-        '&:hover:not(.active)': {
-          backgroundColor: 'rgb(02, 00, 56)',
-          boxShadow: '0px 0px 20px white',
-        },
-
-      }} 
-      type="button" onClick={() => dispatch(deleteContact(id))}>Delete</Button> */}
-
-
-
-        </li>
+          </Button>
+        </Box>
       ))}
-    </ul>
+    </Box>
   );
 };

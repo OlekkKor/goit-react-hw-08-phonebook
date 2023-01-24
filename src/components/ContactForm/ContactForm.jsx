@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { addContact } from '../../redux/contacts/operations.js';
 import { selectContacts } from '../../redux/contacts/selectors.js';
-import css from './ContactForm.module.css';
+
+import { Box, Button } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
@@ -26,7 +28,7 @@ export const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-  
+
     const isContactRepeat = contacts.find(el => el.name === name);
 
     if (isContactRepeat) {
@@ -44,11 +46,24 @@ export const ContactForm = () => {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <h3>Name</h3>
-  
-        <input
-        className={css.input}
+    <Box
+      component="form"
+      autoComplete="off"
+      onSubmit={handleSubmit}
+      sx={{
+        paddingBottom: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '10px',
+      }}
+    >
+      <TextField
+        sx={{ width: 400 }}
+        id="filled-basic"
+        label="Name"
+        variant="filled"
         type="text"
         name="name"
         onChange={inputChange}
@@ -57,20 +72,38 @@ export const ContactForm = () => {
         required
       />
 
-      <h3>Number</h3>
-      <input
-        className={css.input}
-        type="tel"
+      <TextField
+        sx={{ width: 400 }}
+        id="filled-basic"
+        label="Number"
+        variant="filled"
+        type="number"
         name="number"
         onChange={inputChange}
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <button className={css.button} type="submit">
-        {' '}
-        Add contact{' '}
-      </button>
-    </form>
+
+      <Button
+        sx={{
+          height: 45,
+          width: 140,
+          mt: '20px',
+          color: 'white',
+          backgroundColor: '#006064',
+          borderRadius: '15px',
+
+          '&:hover:not(.active)': {
+            color: '#84ffff',
+            backgroundColor: '#006064',
+          },
+        }}
+        type="submit"
+        variant="contained"
+      >
+        Add contact
+      </Button>
+    </Box>
   );
 };

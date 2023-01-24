@@ -1,18 +1,17 @@
+import { Container } from '@mui/material';
+import Bar from '@mui/material/AppBar';
+
 import { Navigation } from '../Navigation/Navigation';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { useAuth } from '../../hooks/useAuth.js';
-import { Container } from '@mui/material';
-import Bar from '@mui/material/AppBar';
-
-
 
 export const AppBar = () => {
-
   const { isLoggedIn } = useAuth();
 
   return (
-    <Bar position="static" 
+    <Bar
+      position="static"
       sx={{
         height: 70,
         display: 'flex',
@@ -20,23 +19,20 @@ export const AppBar = () => {
         justifyContent: 'center',
         color: 'white',
         backgroundColor: '#006064',
-        
-      
-    }} >
-    <Container
-          maxWidth="lg"
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            textTransform: 'uppercase',
-            // pt: '10px',
-            // pb: '16px',
-          }}
-        >
-      <Navigation />
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
-    </Container>
+      }}
+    >
+      <Container
+        maxWidth="lg"
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          textTransform: 'uppercase',
+        }}
+      >
+        <Navigation />
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
+      </Container>
     </Bar>
   );
 };
