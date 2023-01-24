@@ -17,7 +17,7 @@
     width: 85%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     font-weight: 500;
 }
