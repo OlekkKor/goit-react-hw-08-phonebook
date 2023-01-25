@@ -12,8 +12,6 @@ export const useAuth = () => {
   const user = useSelector(selectUser);
   const error = useSelector(selectError);
 
-  console.log(error)
-
   return {
     isLoggedIn,
     isRefreshing,

@@ -6,6 +6,7 @@ import { Box, Button } from '@mui/material';
 export const ContactList = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
+  console.log(visibleContacts);
 
   return (
     <Box
